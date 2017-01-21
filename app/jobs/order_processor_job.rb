@@ -1,5 +1,5 @@
 class OrderProcessorJob < ApplicationJob
-  queue_as :default
+  queue_as :mailers
 
   def perform(_start_date, _end_date)
     start_date = Time.parse(_start_date)
