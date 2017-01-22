@@ -6,10 +6,10 @@ module OrderResponseExtractor
   module_function
 
   def orders(response, first_page = true)
-    response.dig(*HIERARCHY[first_page])['Orders']['Order']
+    response.dig(*HIERARCHY[first_page]).dig('Orders', 'Order') || []
   end
 
   def next_token(response, first_page = true)
-    response.dig(*HIERARCHY[first_page])['NextToken']
+    response.dig(*HIERARCHY[first_page]).dig('NextToken')
   end
 end
