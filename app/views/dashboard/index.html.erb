@@ -1,0 +1,13 @@
+<%= form_tag schedule_orders_path do %>
+  <div>
+    <%= label_tag :start_date %>
+    <%= text_field_tag :start_date %>
+  </div>
+  <div>
+    <%= label_tag :end_date %>
+    <%= text_field_tag :end_date %>
+  </div>
+  <div>
+    <%= submit_tag %>
+  </div>
+<% end %>
