@@ -1,5 +1,5 @@
 class NextPageOrderProcessorJob < ApplicationJob
-  queue_as :mailers
+  queue_as :default
 
   def perform(token)
     response(token).orders.each_with_index do |order, index|
