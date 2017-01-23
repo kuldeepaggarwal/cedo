@@ -10,6 +10,6 @@ class EmailSenderJob < ApplicationJob
       mail_sending = true
     end
     FeedbackMailer.product_feedback(order.buyer_email, order.buyer_name, order.feedback_url, order.title)
-                  .deliver_now! if mail_sending
+                  .deliver_later! if mail_sending
   end
 end
