@@ -26,11 +26,11 @@ class Order
   private
 
     def line_item
-      line_items.first['OrderItem']
+      line_items.first
     end
 
     def line_items
-      @line_items ||= Array.wrap(response['ListOrderItemsResponse']['ListOrderItemsResult']['OrderItems'])
+      @line_items ||= Array.wrap(response['ListOrderItemsResponse']['ListOrderItemsResult']['OrderItems']['OrderItem'])
     end
 
     def response
