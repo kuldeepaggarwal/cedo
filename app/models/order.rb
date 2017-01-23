@@ -34,6 +34,10 @@ class Order
     end
 
     def response
-      Hash.from_xml(MWS.orders.list_order_items(amazon_order_id).body)
+      Hash.from_xml(_response.body)
+    end
+
+    def _response
+      @_response ||= MWS.orders.list_order_items(amazon_order_id)
     end
 end
