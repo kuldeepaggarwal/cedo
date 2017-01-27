@@ -1,9 +1,7 @@
-class NextPageOrderProcessorJob < ApplicationJob
-  queue_as :default
-
+class NextPageOrderProcessorWorker < ApplicationWorker
   def perform(token, asins)
     response(token, asins).orders.each_with_index do |order, index|
-      EmailSenderJob.set(wait: (index * 10).seconds).perform_later(order.buyer_email, order.buyer_name, order.amazon_order_id, asins)
+      EmailSenderWorker.perform_in((index * 10).seconds, order.buyer_email, order.buyer_name, order.amazon_order_id, asins)
     end
   end
 

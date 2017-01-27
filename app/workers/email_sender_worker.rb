@@ -1,9 +1,5 @@
-class EmailSenderJob < ApplicationJob
-  queue_as :default
-
-  rescue_from(StandardError) do |exception|
-    retry_job wait: 3.minutes, queue: :default
-  end
+class EmailSenderWorker < ApplicationWorker
+  sidekiq_retry_in { |count| 3.minutes }
 
   def perform(buyer_email, buyer_name, amazon_order_id, asins)
     order = Order.new(BuyerEmail: buyer_email, BuyerName: buyer_name, AmazonOrderId: amazon_order_id)

@@ -25,7 +25,7 @@ class AmazonOrders
       end
 
       def schedule_next_page_request
-        NextPageOrderProcessorJob.set(wait: 120.seconds).perform_later(next_token, @asins)
+        NextPageOrderProcessorWorker.perform_in(120.seconds, next_token, @asins)
       end
 
       def filter_orders(values)
